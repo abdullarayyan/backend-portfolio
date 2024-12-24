@@ -23,28 +23,27 @@ class ApiController extends Controller
 
         $websiteData = [
             "homepage" => [
-                "roleLine1" => $homepage->role_line_1,
-                "roleLine2" => $homepage->role_line_2,
-                "flipRole" => $homepage->flip_role,
+                "roleLine1" => $homepage ? $homepage->role_line_1 : null,
+                "roleLine2" => $homepage ? $homepage->role_line_2 : null,
+                "flipRole" => $homepage ? $homepage->flip_role : null,
                 "images" => [
-                    "profile" => optional($homepage->images->where('type', 'profile')->first())->path
+                    "profile" => optional($homepage)->images->where('type', 'profile')->first()
                         ? asset('storage/' . $homepage->images->where('type', 'profile')->first()->path)
                         : null,
-                    "click" => optional($homepage->images->where('type', 'click')->first())->path
+                    "click" => optional($homepage)->images->where('type', 'click')->first()
                         ? asset('storage/' . $homepage->images->where('type', 'click')->first()->path)
                         : null,
-                    "angles" => $homepage->images->where('type', 'angle')->sortBy('sort')->pluck('path')->map(function ($path) {
+                    "angles" => optional($homepage)->images->where('type', 'angle')->sortBy('sort')->pluck('path')->map(function ($path) {
                         return asset('storage/' . $path);
                     })
                 ]
-
             ],
-            "aboutSection" => [
+            "aboutSection" => $about ? [
                 "title" => $about->title,
                 "name1" => $about->name_1,
                 "name2" => $about->name_2,
                 "description" => $about->description
-            ],
+            ] : null,
             "experiences" => $experiences,
             "Marquee" => $marque,
             "skills_sections" => $skills
@@ -54,16 +53,15 @@ class ApiController extends Controller
     }
     public function getProjectsData(): JsonResponse
     {
-        $projects = Project::with(['sections.images'])->orderBy('sort')->get(); // Sort projects by 'sort' column
+        $projects = Project::with(['sections.images'])->orderBy('sort')->get();
 
         $projectData = $projects->map(function ($project) {
+            $firstImage = $project->sections->pluck('images')->flatten()->first();
             return [
                 "id" => $project->id,
                 "name" => $project->title,
                 "type" => $project->subtitle,
-                "imageSrc" => optional($project->sections->pluck('images')->flatten()->first())->path
-                    ? asset('storage/' . optional($project->sections->pluck('images')->flatten()->first())->path)
-                    : null,
+                "imageSrc" => $firstImage ? asset('storage/' . $firstImage->path) : null,
                 "sections" => $project->sections->sortBy('sort')->map(function ($section) {
                     return [
                         "type" => $section->type,
