@@ -1,0 +1,220 @@
+{
+    "WebsiteData": {
+        "homepage": {
+            "roleLine1": "GRAPHIC",
+            "roleLine2": "& UI/UX",
+            "flipRole": "DESIGNER",
+            "images": {
+                "profile": "images/angles/Main_result.webp",
+                "click": "images/angles/click.webp",
+                "angles": [
+                    "images/angles/0.webp",
+                    "images/angles/1.webp",
+                    "images/angles/2.webp",
+                    "images/angles/3.webp",
+                    "images/angles/4.webp",
+                    "images/angles/5.webp",
+                    "images/angles/6.webp",
+                    "images/angles/7.webp",
+                    "images/angles/8.webp",
+                    "images/angles/9.webp",
+                    "images/angles/10.webp",
+                    "images/angles/11.webp",
+                    "images/angles/12.webp",
+                    "images/angles/13.webp",
+                    "images/angles/14.webp",
+                    "images/angles/15.webp",
+                    "images/angles/16.webp",
+                    "images/angles/17.webp",
+                    "images/angles/18.webp"
+                ]
+            }
+        },
+        "aboutSection": {
+            "title": "About",
+            "name1": "Mezher",
+            "name2": "Jeebat",
+            "description": "A seasoned graphic design professional with over five years of experience across sectors such as marketing, healthcare, finance, IT, interactive storytelling & telecommunications. His expertise extends beyond traditional graphic design to include a strong background in User Interface (UI) and User Experience (UX) design, making him versatile across both digital & print platforms."
+        },
+        "Marquee": [
+            "USER INTERFACE",
+            "GRAPHIC DESIGN",
+            "PRODUCT DEVELOPMENT",
+            "USER EXPERIENCE",
+            "BRANDING"
+        ],
+        "experience": {
+            "title": "EXPERIENCE",
+            "subtitle": "HISTORY",
+            "description": "With a proven track record of over five years in graphic and UI/UX design, Mezher Jeebat has led innovative projects across diverse industries, from telecommunications and media to healthcare and interactive storytelling. Known for his leadership and creative vision, he consistently drives teams to excel, achieving top rankings in brand implementation and crafting intuitive, user-centered designs that resonate deeply with audiences.",
+            "experiences": [
+                {
+                    "title": "Senior Graphic & UX/UI Designer",
+                    "company": "OOREDOO PALESTINE",
+                    "date": "2020-08-01",
+                    "endDate": "2020-06-01",
+                    "isStillWorking": true
+                },
+                {
+                    "title": "Product Leader",
+                    "company": "STORYME",
+                    "date": "2022-12-01",
+                    "endDate": "2023-07-01",
+                    "isStillWorking": false
+                },
+                {
+                    "title": "Senior Graphic Designer",
+                    "company": "DRAGON STUDIOS",
+                    "date": "2019-07-01",
+                    "endDate": "2020-08-01",
+                    "isStillWorking": false
+                },
+                {
+                    "title": "UX/UI Designer",
+                    "company": "EDUBOOK",
+                    "date": "2016-02-01",
+                    "endDate": "2020-06-01",
+                    "isStillWorking": false
+                }
+            ]
+        },
+        "SkillsSection": {
+            "title": "SKILLS &",
+            "subTitle": "PROJECTS",
+            "description": "Explore Mezher Jeebat’s portfolio to witness how his expertise in user-centered design and brand implementation delivers impactful, top-ranking solutions that drive meaningful engagement and elevate brand presence.",
+            "skills": [
+                { "id": 1, "title": "UI/UX"},
+                { "id": 2, "title": "BRANDING" },
+                { "id": 3, "title": "CAMPAIGNS" },
+                { "id": 4, "title": "ART" }
+            ]
+        },
+        "linkedIn": "",
+        "email": ""
+    },
+    "Projects": {
+        "skill_id": "",
+        "id": "1",
+        "title": "UI/UX",
+        "subtitle": "PROJECTS",
+        "description1": "A seasoned graphic design professional",
+        "description2": "with over five years of experience across",
+        "list": [
+            {
+                "id": "1",
+                "name": "OOREDOO APP1",
+                "type": "UI/UX",
+                "imageSrc": "/images/slide1.jpg",
+                "sections": [
+                    {
+                        "type": "0",
+                        "title": "Intro",
+                        "description": "A seasoned graphic design professional with over five years of experience across 11111"
+                    },
+                    {
+                        "type": "1",
+                        "title": "Work Process",
+                        "description": "We started with very little; we based our work on assumptions based on our knowledge, internal interview of blockchain explorer and attentive analysis of our competitions.One important question was how simple did we want the Explorer to be? Would it make sense for it to be simple even, like blockchain.com ? Or did we want to.",
+                        "hasImages": true,
+                        "images": [
+                            "/images/slide1.jpg",
+                            "/images/slide2.jpg",
+                            "/images/slide3.jpg",
+                            "/images/slide1.jpg"
+                        ]
+                    },
+                    {
+                        "type": "2",
+                        "title": "Outcomes",
+                        "description": "This endeavor helped us test our work process under heavy strain and very little requirement, pushing for better work collaboration within engineering teams on complex products. BitMEX Brand Our new brand helped us revive our brand and stand out from the crowded crypto industry and leverage our existing heritage, while paving the way for our planned.",
+                        "hasGridImages": true,
+                        "gridImages": [
+                            "/images/slide1.jpg",
+                            "/images/slide2.jpg",
+                            "/images/slide3.jpg"
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "OOREDOO APP2",
+                "type": "BRANDING",
+                "imageSrc": "/images/slide2.jpg",
+                "sections": [
+                    {
+                        "type": "0",
+                        "title": "Intro",
+                        "description": "A seasoned graphic design professional with over five years of experience across 222222"
+                    },
+                    {
+                        "type": "1",
+                        "title": "Work Process",
+                        "description": "We started with very little; we based our work on assumptions based on our knowledge, internal interview of blockchain explorer and attentive analysis of our competitions.One important question was how simple did we want the Explorer to be? Would it make sense for it to be simple even, like blockchain.com ? Or did we want to.",
+                        "hasImages": true,
+                        "images": [
+                            "/images/slide1.jpg",
+                            "/images/slide2.jpg",
+                            "/images/slide3.jpg",
+                            "/images/slide1.jpg"
+                        ]
+                    },
+
+                    {
+                        "type": "2",
+                        "title": "Outcomes",
+                        "description": "This endeavor helped us test our work process under heavy strain and very little requirement, pushing for better work collaboration within engineering teams on complex products. BitMEX Brand Our new brand helped us revive our brand and stand out from the crowded crypto industry and leverage our existing heritage, while paving the way for our planned.",
+                        "hasGridImages": true,
+                        "gridImages": [
+                            "/images/slide1.jpg",
+                            "/images/slide2.jpg",
+                            "/images/slide3.jpg"
+                        ]
+                    },
+                    {
+                        "type": "1",
+                        "title": "Work Process2",
+                        "description": "We started with very little; we based our work on assumptions based on our knowledge, internal interview of blockchain explorer and attentive analysis of our competitions.One important question was how simple did we want the Explorer to be? Would it make sense for it to be simple even, like blockchain.com ? Or did we want to.",
+                        "hasImages": true,
+                        "images": [
+                            "/images/slide1.jpg",
+                            "/images/slide2.jpg",
+                            "/images/slide3.jpg",
+                            "/images/slide1.jpg"
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "name": "OOREDOO APP3",
+                "type": "DESIGN",
+                "imageSrc": "/images/slide3.jpg",
+                "sections": [
+                    {
+                        "type": "0",
+                        "title": "Intro",
+                        "description": "A seasoned graphic design professional with over five years of experience across 33333"
+                    },
+
+                    {
+                        "type": "2",
+                        "title": "Outcomes",
+                        "description": "This endeavor helped us test our work process under heavy strain and very little requirement, pushing for better work collaboration within engineering teams on complex products. BitMEX Brand Our new brand helped us revive our brand and stand out from the crowded crypto industry and leverage our existing heritage, while paving the way for our planned.",
+                        "hasGridImages": true,
+                        "gridImages": [
+                            "/images/slide1.jpg",
+                            "/images/slide2.jpg",
+                            "/images/slide3.jpg"
+                        ]
+                    },
+                    {
+                        "type": "0",
+                        "title": "Intro",
+                        "description": "A seasoned graphic design professional with over five years of experience across 2"
+                    }
+                ]
+            }
+        ]
+    }
+}

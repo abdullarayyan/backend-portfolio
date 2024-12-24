@@ -15,4 +15,9 @@ class Skill extends Model
     {
         return $this->belongsTo(SkillsSection::class, 'skills_section_id');
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

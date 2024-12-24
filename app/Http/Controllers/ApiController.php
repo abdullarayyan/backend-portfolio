@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Skill;
 use App\Models\SkillsSection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
@@ -18,8 +19,9 @@ class ApiController extends Controller
         $homepage = Homepage::with('images')->first();
         $about = About::first();
         $experiences = Experience::all();
-        $skills = SkillsSection::with('skills')->get();
+        $skills = SkillsSection::with(['skills.projects.sections.images'])->get();
         $marque = MarqueeItem::all();
+        $projects = Project::with(['sections.images'])->orderBy('sort')->get();
 
         $websiteData = [
             "homepage" => [
@@ -46,7 +48,68 @@ class ApiController extends Controller
             ] : null,
             "experiences" => $experiences,
             "Marquee" => $marque,
-            "skills_sections" => $skills
+            "skillsSections" => $skills->mapWithKeys(function ($skillSection) {
+                return [
+                        "title" => $skillSection->title,
+                        "subtitle" => $skillSection->subtitle,
+                        "description" => $skillSection->description,
+                        "skills" => $skillSection->skills->map(function ($skill) {
+                            return [
+                                "id" => $skill->id,
+                                "title" => $skill->title,
+                                "is_active" => $skill->is_active,
+                                "projects" => $skill->projects->map(function ($project) {
+                                    $firstImage = $project->sections->pluck('images')->flatten()->first();
+                                    return [
+                                        "id" => $project->id,
+                                        "name" => $project->title,
+                                        "type" => $project->subtitle,
+                                        "imageSrc" => $firstImage ? asset('storage/' . $firstImage->path) : null,
+                                        "sections" => $project->sections->sortBy('sort')->map(function ($section) {
+                                            return [
+                                                "type" => $section->type,
+                                                "title" => $section->title,
+                                                "description" => $section->description,
+                                                "hasImages" => $section->has_images,
+                                                "images" => $section->images->sortBy('sort')->pluck('path')->map(function ($path) {
+                                                    return asset('storage/' . $path);
+                                                }),
+                                                "hasGridImages" => $section->has_grid_images,
+                                                "gridImages" => $section->images->where('type', 'grid')->sortBy('sort')->pluck('path')->map(function ($path) {
+                                                    return asset('storage/' . $path);
+                                                }),
+                                            ];
+                                        })
+                                    ];
+                                }),
+                            ];
+                        }),
+                ];
+            }),
+            "projects"=> $projects->map(function ($project) {
+                $firstImage = $project->sections->pluck('images')->flatten()->first();
+                return [
+                    "id" => $project->id,
+                    "name" => $project->title,
+                    "type" => $project->subtitle,
+                    "imageSrc" => $firstImage ? asset('storage/' . $firstImage->path) : null,
+                    "sections" => $project->sections->sortBy('sort')->map(function ($section) {
+                        return [
+                            "type" => $section->type,
+                            "title" => $section->title,
+                            "description" => $section->description,
+                            "hasImages" => $section->has_images,
+                            "images" => $section->images->sortBy('sort')->pluck('path')->map(function ($path) {
+                                return asset('storage/' . $path);
+                            }),
+                            "hasGridImages" => $section->has_grid_images,
+                            "gridImages" => $section->images->where('type', 'grid')->sortBy('sort')->pluck('path')->map(function ($path) {
+                                return asset('storage/' . $path);
+                            }),
+                        ];
+                    })
+                ];
+            })
         ];
 
         return response()->json(["WebsiteData" => $websiteData], 200);
@@ -82,6 +145,49 @@ class ApiController extends Controller
 
         return response()->json(["Projects" => $projectData], 200);
     }
+
+    public function getProjectsBySkill(Request $request): JsonResponse
+    {
+        // Validate that the skill_id exists in the request
+        $validated = $request->validate([
+            'skill_id' => 'required|exists:skills,id',
+        ]);
+
+        // Fetch projects related to the given skill_id
+        $projects = Project::whereHas('skill', function ($query) use ($request) {
+            $query->where('id', $request->skill_id);
+        })->with(['sections.images'])->orderBy('sort')->get();
+
+        // Transform the projects data
+        $projectData = $projects->map(function ($project) {
+            $firstImage = $project->sections->pluck('images')->flatten()->first();
+            return [
+                "id" => $project->id,
+                "name" => $project->title,
+                "type" => $project->subtitle,
+                "imageSrc" => $firstImage ? asset('storage/' . $firstImage->path) : null,
+                "sections" => $project->sections->sortBy('sort')->map(function ($section) {
+                    return [
+                        "type" => $section->type,
+                        "title" => $section->title,
+                        "description" => $section->description,
+                        "hasImages" => $section->has_images,
+                        "images" => $section->images->sortBy('sort')->pluck('path')->map(function ($path) {
+                            return asset('storage/' . $path);
+                        }),
+                        "hasGridImages" => $section->has_grid_images,
+                        "gridImages" => $section->images->where('type', 'grid')->sortBy('sort')->pluck('path')->map(function ($path) {
+                            return asset('storage/' . $path);
+                        }),
+                    ];
+                })
+            ];
+        });
+
+        // Return the response
+        return response()->json(["Projects" => $projectData], 200);
+    }
+
 //    public function getWebsiteData(): JsonResponse
 //    {
 //        $websiteData = [

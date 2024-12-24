@@ -14,4 +14,10 @@ class Project extends Model
     {
         return $this->hasMany(ProjectSection::class);
     }
+
+    public function skill()
+    {
+        return $this->belongsTo(Skill::class);
+    }
+
 }

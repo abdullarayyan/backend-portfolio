@@ -22,3 +22,4 @@ use App\Http\Controllers\ApiController;
 
 Route::get('/website-data', [ApiController::class, 'getWebsiteData']);
 Route::get('/projects-data', [ApiController::class, 'getProjectsData']);
+Route::get('/projects-by-skill', [ApiController::class, 'getProjectsBySkill']);

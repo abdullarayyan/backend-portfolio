@@ -26,7 +26,8 @@ class ProjectController extends Controller
             'subtitle' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'image_src' => 'required|image',  // Ensure the uploaded file is an image
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
+            'skill_id' => 'required|exists:skills,id' // Ensure the skill exists
         ]);
 
         $imagePath = '';  // Initialize variable to hold the image path
@@ -43,6 +44,8 @@ class ProjectController extends Controller
             'type' => $request->type,
             'sort' => $request->sort,
             'is_active' => $request->is_active,
+            'skill_id' => $request->skill_id, // Storing skill_id
+
         ]);
 
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
@@ -65,7 +68,9 @@ class ProjectController extends Controller
             'subtitle' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'image_src' => 'sometimes|image',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
+            'skill_id' => 'required|exists:skills,id'
+
         ]);
 
         $data = $request->all();

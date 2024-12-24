@@ -6,6 +6,15 @@
         <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label for="skill_id">Skill</label>
+                <select class="form-control" id="skill_id" name="skill_id" required>
+                    @foreach(App\Models\Skill::all() as $skill)
+                        <option value="{{ $skill->id }}">{{ $skill->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
             </div>
