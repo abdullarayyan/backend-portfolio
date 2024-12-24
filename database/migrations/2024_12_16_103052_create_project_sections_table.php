@@ -13,7 +13,7 @@ class CreateProjectSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('project_sections', function (Blueprint $table) {
+        Schema::create('project_sections', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['intro', 'work_process', 'outcomes']);

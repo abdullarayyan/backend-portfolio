@@ -13,7 +13,7 @@ class CreateHomepageImagesTable extends Migration
      */
     public function up()
     {
-        Schema::table('homepage_images', function (Blueprint $table) {
+        Schema::create('homepage_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('homepage_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['profile', 'click', 'angle']);
