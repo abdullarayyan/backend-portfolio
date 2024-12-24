@@ -1,0 +1,41 @@
+name: Deploy Laravel Backend
+
+on:
+  push:
+    branches:
+      - main  # Adjust if you want to trigger deployment on a different branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1' # Adjust PHP version as per your Laravel project
+          extensions: mbstring, pdo, mysql, bcmath
+          tools: composer
+
+      - name: Install Composer Dependencies
+        run: composer install --optimize-autoloader --no-dev
+
+      - name: Deploy to Hostinger
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -i private_key.pem -o StrictHostKeyChecking=no -p 65002 u725898012@92.113.18.231 << 'EOF'
+            cd public_html/backend
+            git pull origin main
+            composer install --optimize-autoloader --no-dev
+            php artisan migrate --force
+            php artisan cache:clear
+            php artisan config:clear
+            php artisan route:cache
+            php artisan view:cache
+            exit
