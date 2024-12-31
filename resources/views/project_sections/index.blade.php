@@ -13,6 +13,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>project</th>
                 <th>Title</th>
                 <th>Type</th>
                 <th>Description</th>
@@ -26,6 +27,7 @@
             @foreach ($sections as $section)
                 <tr>
                     <td>{{ $section->id }}</td>
+                    <td>{{ optional($section->project)->title }}</td>
                     <td>{{ $section->title }}</td>
                     <td>{{ $section->type }}</td>
                     <td>{{ $section->description }}</td>

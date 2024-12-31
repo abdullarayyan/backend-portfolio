@@ -10,7 +10,7 @@
                 <label for="section_id">Section</label>
                 <select class="form-control" id="section_id" name="section_id">
                     @foreach ($sections as $section)
-                        <option value="{{ $section->id }}" {{ $section->id == $sectionImage->section_id ? 'selected' : '' }}>{{ $section->title }}</option>
+                        <option value="{{ $section->id }}" {{ $section->id == $sectionImage->section_id ? 'selected' : '' }}>{{ $section->project->title .' - ' .$section->title  }}</option>
                     @endforeach
                 </select>
             </div>

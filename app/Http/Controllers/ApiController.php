@@ -148,44 +148,53 @@ class ApiController extends Controller
 
     public function getProjectsBySkill(Request $request): JsonResponse
     {
-        // Validate that the skill_id exists in the request
-        $validated = $request->validate([
-            'skill_id' => 'required|exists:skills,id',
-        ]);
+        $projects = \App\Models\Project::query()
+            ->where('skill_id', 1)
+            ->with('sections.images')
+            ->get()
+            ->map(function ($project) {
+                return [
+                    'id' => (string)$project->id,
+                    'name' => $project->title,
+                    'type' => $project->type,
+                    'imageSrc' => "/images/" . basename($project->image_src),
+                    'sections' => $project->sections->map(function ($section) {
+                        return [
+                            'type' => $section->type,
+                            'title' => $section->title,
+                            'description' => $section->description,
+                            'hasImages' => (bool)$section->has_images,
+                            'images' => $section->images->map(function ($image) {
+                                return "/images/" . basename($image->path);
+                            })->toArray(),
+                            'hasGridImages' => (bool)$section->has_grid_images,
+                            'gridImages' => $section->images
+                                ->filter(function ($image) {
+                                    return $image->type === 'grid';
+                                })
+                                ->map(function ($image) {
+                                    return "/images/" . basename($image->path);
+                                })
+                                ->toArray(),
+                        ];
+                    })->toArray()
+                ];
+            })->toArray();
 
-        // Fetch projects related to the given skill_id
-        $projects = Project::whereHas('skill', function ($query) use ($request) {
-            $query->where('id', $request->skill_id);
-        })->with(['sections.images'])->orderBy('sort')->get();
+        $response = [
+            'Projects' => [
+                'id' => '1',
+                'title' => 'UI/UX',
+                'subtitle' => 'PROJECTS',
+                'description1' => 'A seasoned graphic design professional',
+                'description2' => 'with over five years of experience across',
+                'list' => $projects
+            ]
+        ];
 
-        // Transform the projects data
-        $projectData = $projects->map(function ($project) {
-            $firstImage = $project->sections->pluck('images')->flatten()->first();
-            return [
-                "id" => $project->id,
-                "name" => $project->title,
-                "type" => $project->subtitle,
-                "imageSrc" => $firstImage ? asset('storage/' . $firstImage->path) : null,
-                "sections" => $project->sections->sortBy('sort')->map(function ($section) {
-                    return [
-                        "type" => $section->type,
-                        "title" => $section->title,
-                        "description" => $section->description,
-                        "hasImages" => $section->has_images,
-                        "images" => $section->images->sortBy('sort')->pluck('path')->map(function ($path) {
-                            return asset('storage/' . $path);
-                        }),
-                        "hasGridImages" => $section->has_grid_images,
-                        "gridImages" => $section->images->where('type', 'grid')->sortBy('sort')->pluck('path')->map(function ($path) {
-                            return asset('storage/' . $path);
-                        }),
-                    ];
-                })
-            ];
-        });
 
-        // Return the response
-        return response()->json(["Projects" => $projectData], 200);
+        return response()->json($response,200);
+
     }
 
 //    public function getWebsiteData(): JsonResponse

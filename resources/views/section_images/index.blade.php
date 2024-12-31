@@ -13,6 +13,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>project</th>
                 <th>Section</th>
                 <th>Type</th>
                 <th>Path</th>
@@ -25,6 +26,7 @@
             @foreach ($images as $image)
                 <tr>
                     <td>{{ $image->id }}</td>
+                    <td>{{ $image->section->project->title }}</td>
                     <td>{{ $image->section->title }}</td>
                     <td>{{ $image->type }}</td>
                     <td><img src="{{ Storage::url($image->path) }}" alt="Image" style="width: 100px;"></td>

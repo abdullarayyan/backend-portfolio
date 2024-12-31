@@ -13,6 +13,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Skill</th>
                 <th>Title</th>
                 <th>Subtitle</th>
                 <th>Type</th>
@@ -26,6 +27,7 @@
             @foreach ($projects as $project)
                 <tr>
                     <td>{{ $project->id }}</td>
+                    <td>{{ $project->skill->title }}</td>
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->subtitle }}</td>
                     <td>{{ $project->type }}</td>

@@ -9,7 +9,7 @@
                 <label for="section_id">Section</label>
                 <select class="form-control" id="section_id" name="section_id">
                     @foreach ($sections as $section)
-                        <option value="{{ $section->id }}">{{ $section->title }}</option>
+                        <option value="{{ $section->id }}">{{ $section->project->title .' - ' .$section->title}}</option>
                     @endforeach
                 </select>
             </div>
