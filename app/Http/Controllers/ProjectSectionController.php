@@ -23,7 +23,7 @@ class ProjectSectionController extends Controller
     {
         $request->validate([
             'project_id' => 'required|exists:projects,id',
-            'type' => 'required|in:intro,work_process,outcomes',
+            'type' => 'required',
             'title' => 'required|string|max:255',
             'description' => 'required',
             'has_images' => 'boolean',
@@ -50,7 +50,7 @@ class ProjectSectionController extends Controller
     {
         $request->validate([
             'project_id' => 'required|exists:projects,id',
-            'type' => 'required|in:intro,work_process,outcomes',
+            'type' => 'required',
             'title' => 'required|string|max:255',
             'description' => 'required',
             'has_images' => 'boolean',
