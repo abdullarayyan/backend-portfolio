@@ -10,7 +10,7 @@ class CreateProjectSectionsTable extends Migration
         Schema::create('project_sections', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['intro', 'work_process', 'outcomes']);
+            $table->enum('type', ['normal_section', 'slider_section', 'grid_section']);
             $table->string('title');
             $table->text('description');
             $table->boolean('has_images')->default(false);
