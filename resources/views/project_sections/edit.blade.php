@@ -17,9 +17,9 @@
             <div class="form-group">
                 <label for="type">Type</label>
                 <select class="form-control" id="type" name="type">
-                    <option value="intro" {{ $projectSection->type == 'intro' ? 'selected' : '' }}>Intro</option>
-                    <option value="work_process" {{ $projectSection->type == 'work_process' ? 'selected' : '' }}>Work Process</option>
-                    <option value="outcomes" {{ $projectSection->type == 'outcomes' ? 'selected' : '' }}>Outcomes</option>
+                    <option value="normal_section" {{ $projectSection->type == 'normal_section' ? 'selected' : '' }}>Normal Section</option>
+                    <option value="slider_section" {{ $projectSection->type == 'slider_section' ? 'selected' : '' }}>Slider Section</option>
+                    <option value="grid_section" {{ $projectSection->type == 'grid_section' ? 'selected' : '' }}>Grid Section</option>
                 </select>
             </div>
             <div class="form-group">

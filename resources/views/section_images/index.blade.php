@@ -29,7 +29,7 @@
                     <td>{{ $image->section->project->title }}</td>
                     <td>{{ $image->section->title }}</td>
                     <td>{{ $image->type }}</td>
-                    <td><img src="{{ Storage::url($image->path) }}" alt="Image" style="width: 100px;"></td>
+                    <td><img src="{{ asset('storage/' . $sectionImage->path) }}" alt="Image" style="width: 100px;"></td>
                     <td>{{ $image->is_active ? 'Yes' : 'No' }}</td>
                     <td>{{ $image->sort}}</td>
 

@@ -148,8 +148,11 @@ class ApiController extends Controller
 
     public function getProjectsBySkill(Request $request): JsonResponse
     {
+        $skill = Skill::query()->find($request->skill_id);
+        $project = Project::query()->where('skill_id',$request->skill_id)->first();
+
         $projects = \App\Models\Project::query()
-            ->where('skill_id', 1)
+            ->where('skill_id', $request->skill_id)
             ->with('sections.images')
             ->get()
             ->map(function ($project) {
@@ -157,7 +160,7 @@ class ApiController extends Controller
                     'id' => (string)$project->id,
                     'name' => $project->title,
                     'type' => $project->type,
-                    'imageSrc' => "/images/" . basename($project->image_src),
+                    'imageSrc' => asset('storage/' . $project->image_src) ,
                     'sections' => $project->sections->map(function ($section) {
                         return [
                             'type' => $section->type,
@@ -165,7 +168,7 @@ class ApiController extends Controller
                             'description' => $section->description,
                             'hasImages' => (bool)$section->has_images,
                             'images' => $section->images->map(function ($image) {
-                                return "/images/" . basename($image->path);
+                                return asset('storage/' . $image->path);
                             })->toArray(),
                             'hasGridImages' => (bool)$section->has_grid_images,
                             'gridImages' => $section->images
@@ -173,7 +176,7 @@ class ApiController extends Controller
                                     return $image->type === 'grid';
                                 })
                                 ->map(function ($image) {
-                                    return "/images/" . basename($image->path);
+                                    return asset('storage/' . $image->path);
                                 })
                                 ->toArray(),
                         ];
@@ -183,11 +186,11 @@ class ApiController extends Controller
 
         $response = [
             'Projects' => [
-                'id' => '1',
-                'title' => 'UI/UX',
-                'subtitle' => 'PROJECTS',
-                'description1' => 'A seasoned graphic design professional',
-                'description2' => 'with over five years of experience across',
+                'id' => $request->skill_id,
+                'title' => $project->title??'',
+                'subtitle' => $project->subtitle,
+                'description1' => $skill->description,
+                'description2' => $skill->section->description,
                 'list' => $projects
             ]
         ];

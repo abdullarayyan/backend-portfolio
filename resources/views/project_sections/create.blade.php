@@ -16,9 +16,9 @@
             <div class="form-group">
                 <label for="type">Type</label>
                 <select class="form-control" id="type" name="type">
-                    <option value="intro">Intro</option>
-                    <option value="work_process">Work Process</option>
-                    <option value="outcomes">Outcomes</option>
+                    <option value="normal_section">Normal Section</option>
+                    <option value="slider_section">Slider Section</option>
+                    <option value="grid_section">Grid Section</option>
                 </select>
             </div>
             <div class="form-group">

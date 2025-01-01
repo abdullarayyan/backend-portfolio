@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label for="path">Change Image (optional)</label>
                 <input type="file" class="form-control-file" id="path" name="path">
-                Current Image: <img src="{{ Storage::url($sectionImage->path) }}" alt="Image" style="width: 100px;">
+                Current Image: <img src="{{ asset('storage/' . $sectionImage->path) }}" alt="Image" style="width: 100px;">
             </div>
             <div class="form-group">
                 <label for="is_active">Is Active</label>
