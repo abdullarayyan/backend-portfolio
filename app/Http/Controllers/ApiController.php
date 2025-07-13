@@ -93,6 +93,16 @@ class ApiController extends Controller
                     "id" => $project->id,
                     "name" => $project->title,
                     "type" => $project->subtitle,
+                    "counter" =>  [
+                        'title' => 'Subscribers',
+                        'number' => $project->subscribers ?? 0,
+                        'numberType' => 'normal',
+                    ],
+                    [
+                        'title' => 'Satisfaction Rate',
+                        'number' => $project->satisfaction_rate ?? 0,
+                        'numberType' => 'percentage',
+                    ],
                     "imageSrc" => $firstImage ? asset('storage/' . $firstImage->path) : null,
                     "sections" => $project->sections->sortBy('sort')->map(function ($section) {
                         return [
