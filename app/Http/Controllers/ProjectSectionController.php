@@ -67,4 +67,9 @@ class ProjectSectionController extends Controller
         $projectSection->delete();
         return redirect()->route('project_sections.index')->with('success', 'Section deleted successfully.');
     }
+    public function images(ProjectSection $section)
+    {
+        $images = $section->images;
+        return view('project_sections.images', compact('section', 'images'));
+    }
 }

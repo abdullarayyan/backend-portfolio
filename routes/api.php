@@ -23,3 +23,6 @@ use App\Http\Controllers\ApiController;
 Route::get('/website-data', [ApiController::class, 'getWebsiteData']);
 Route::get('/projects-data', [ApiController::class, 'getProjectsData']);
 Route::get('/projects-by-skill', [ApiController::class, 'getProjectsBySkill']);
+Route::get('/settings/video', [ApiController::class, 'getVideo']);
+Route::get('/settings/audio', [ApiController::class, 'getAudio']);
+Route::get('/projects/{id}/counters', [ApiController::class, 'getCounters']);

@@ -26,11 +26,23 @@
                 <label for="type">Type</label>
                 <input type="text" class="form-control" id="type" name="type" value="{{ $project->type }}" required>
             </div>
+            <hr>
+
             <div class="form-group">
                 <label for="image_src">Change Image (optional)</label>
                 <input type="file" class="form-control-file" id="image_src" name="image_src">
                 Current Image: <img src="{{ asset('storage/' . $project->image_src) }}" width="100">
             </div>
+
+            <hr>
+            <div class="form-group">
+                <label for="image_mobile">Change Mobile Image (optional)</label>
+                <input type="file" class="form-control-file" id="image_mobile" name="image_mobile">
+                @if($project->image_mobile)
+                    Current Mobile Image: <img src="{{ asset('storage/' . $project->image_mobile) }}" width="100">
+                @endif
+            </div>
+            <hr>
             <div class="form-group">
                 <label for="is_active">Is Active</label>
                 <select class="form-control" id="is_active" name="is_active">

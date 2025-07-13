@@ -6,6 +6,7 @@ use App\Models\Experience;
 use App\Models\Homepage;
 use App\Models\MarqueeItem;
 use App\Models\Project;
+use App\Models\Setting;
 use App\Models\Skill;
 use App\Models\SkillsSection;
 use Illuminate\Http\JsonResponse;
@@ -314,4 +315,49 @@ class ApiController extends Controller
 //
 //        return response()->json(["Projects" => $projectData], 200);
 //    }
+
+
+    public function getVideo()
+    {
+        $setting = Setting::first();
+
+        if (!$setting || !$setting->video) {
+            return response()->json(['video_url' => null]);
+        }
+
+        return response()->json([
+            'video_url' => asset('storage/' . $setting->video)
+        ]);
+    }
+
+    public function getAudio()
+    {
+        $setting = Setting::first();
+
+        if (!$setting || !$setting->audio) {
+            return response()->json(['audio_url' => null]);
+        }
+
+        return response()->json([
+            'audio_url' => asset('storage/' . $setting->audio)
+        ]);
+    }
+
+    public function getCounters($id)
+    {
+        $project = Project::findOrFail($id);
+
+        return response()->json([
+            [
+                'title' => 'Subscribers',
+                'number' => $project->subscribers ?? 0,
+                'numberType' => 'normal',
+            ],
+            [
+                'title' => 'Satisfaction Rate',
+                'number' => $project->satisfaction_rate ?? 0,
+                'numberType' => 'percentage',
+            ],
+        ]);
+    }
 }

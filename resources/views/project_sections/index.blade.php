@@ -35,6 +35,8 @@
                     <td>{{ $section->is_active ? 'Yes' : 'No' }}</td>
                     <td>{{ $section->sort}}</td>
                     <td>
+                        <a href="{{ route('project_sections.images', $section) }}" class="btn btn-info">📷 Images</a>
+
                         <a href="{{ route('project_sections.edit', $section) }}" class="btn btn-primary">Edit</a>
                         <form action="{{ route('project_sections.destroy', $section) }}" method="post" style="display:inline;">
                             @csrf

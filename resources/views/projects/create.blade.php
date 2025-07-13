@@ -31,6 +31,10 @@
                 <input type="file" class="form-control-file" id="image_src" name="image_src" required>
             </div>
             <div class="form-group">
+                <label for="image_mobile">Mobile Image</label>
+                <input type="file" class="form-control-file" id="image_mobile" name="image_mobile">
+            </div>
+            <div class="form-group">
                 <label for="is_active">Is Active</label>
                 <select class="form-control" id="is_active" name="is_active">
                     <option value="1" selected>Active</option>

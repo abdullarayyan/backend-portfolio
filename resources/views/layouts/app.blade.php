@@ -47,6 +47,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('section_images.index') }}">Section Images</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('settings.edit') }}">Settings</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -72,5 +75,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('textarea[name="description"]').forEach(function (el) {
+            CKEDITOR.replace(el);
+        });
+    });
+</script>
 </body>
 </html>

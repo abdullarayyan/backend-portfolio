@@ -14,10 +14,11 @@ class SectionImageController extends Controller
         return view('section_images.index', compact('images'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $sections = ProjectSection::all();
-        return view('section_images.create', compact('sections'));
+        $sectionId = $request->get('section_id'); // للانتقال من قسم معيّن
+        return view('section_images.create', compact('sections', 'sectionId'));
     }
 
     public function store(Request $request)

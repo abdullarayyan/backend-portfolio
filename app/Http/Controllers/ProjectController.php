@@ -36,6 +36,12 @@ class ProjectController extends Controller
             $imagePath = $request->file('image_src')->store('project_images', 'public');  // Store the image in the 'public' disk under 'project_images'
         }
 
+        if ($request->hasFile('image_mobile')) {
+            $mobileImagePath = $request->file('image_mobile')->store('project_images', 'public');
+        } else {
+            $mobileImagePath = null;
+        }
+
         // Create the project with the path to the stored image
         Project::create( [
             'image_src' => $imagePath,
@@ -45,7 +51,7 @@ class ProjectController extends Controller
             'sort' => $request->sort,
             'is_active' => $request->is_active,
             'skill_id' => $request->skill_id, // Storing skill_id
-
+            'image_mobile' => $mobileImagePath,
         ]);
 
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
@@ -63,31 +69,34 @@ class ProjectController extends Controller
 
     public function update(Request $request, Project $project)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'subtitle' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+        $validated = $request->validate([
+            'title' => 'sometimes|required|string|max:255',
+            'subtitle' => 'sometimes|required|string|max:255',
+            'type' => 'sometimes|required|string|max:255',
             'image_src' => 'sometimes|image',
-            'is_active' => 'boolean',
-            'skill_id' => 'required|exists:skills,id'
-
+            'is_active' => 'sometimes|boolean',
+            'skill_id' => 'sometimes|exists:skills,id',
+            'subscribers' => 'sometimes|nullable|integer|min:0',
+            'satisfaction_rate' => 'sometimes|nullable|integer|min:0|max:100',
         ]);
 
-        $data = $request->all();
-
+        // إذا في صورة جديدة
         if ($request->hasFile('image_src')) {
-            // Delete the old image if it exists
             Storage::disk('public')->delete($project->image_src);
-
-            // Store the new image and update the image path in the data array
-            $data['image_src'] = $request->file('image_src')->store('project_images', 'public');
+            $validated['image_src'] = $request->file('image_src')->store('project_images', 'public');
         }
 
-        $project->update($data);
+        if ($request->hasFile('image_mobile')) {
+            if ($project->image_mobile) {
+                Storage::disk('public')->delete($project->image_mobile);
+            }
+            $validated['image_mobile'] = $request->file('image_mobile')->store('project_images', 'public');
+        }
 
-        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+        $project->update($validated);
+
+        return redirect()->back()->with('success', 'تم تحديث المشروع بنجاح');
     }
-
 
     public function destroy(Project $project)
     {

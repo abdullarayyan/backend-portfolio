@@ -19,6 +19,8 @@
                     <option value="normal_section">Normal Section</option>
                     <option value="slider_section">Slider Section</option>
                     <option value="grid_section">Grid Section</option>
+                    <option value="AfterBefore">After Before</option>
+                    <option value="numbers">Numbers</option>
                 </select>
             </div>
             <div class="form-group">

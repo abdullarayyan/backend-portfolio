@@ -20,6 +20,8 @@
                     <option value="normal_section" {{ $projectSection->type == 'normal_section' ? 'selected' : '' }}>Normal Section</option>
                     <option value="slider_section" {{ $projectSection->type == 'slider_section' ? 'selected' : '' }}>Slider Section</option>
                     <option value="grid_section" {{ $projectSection->type == 'grid_section' ? 'selected' : '' }}>Grid Section</option>
+                    <option value="AfterBefore" {{ $projectSection->type == 'AfterBefore' ? 'selected' : '' }}>After Before  Section</option>
+                    <option value="numbers" {{ $projectSection->type == 'numbers' ? 'selected' : '' }}>Number Section</option>
                 </select>
             </div>
             <div class="form-group">
